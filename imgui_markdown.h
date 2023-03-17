@@ -527,7 +527,7 @@ namespace ImGui
         static const char* linkHoverStart = NULL; // we need to preserve status of link hovering between frames
         Line        line;
         Link        link;
-        Emphasis    em;
+        Emphasis    em{};
         TextRegion  textRegion;
 
         char c = 0;
@@ -721,19 +721,16 @@ namespace ImGui
 					em.state = Emphasis::MIDDLE;
 				}
 				break;
-			case Emphasis::MIDDLE:
-				if( em.sym == c )
-                {
-					em.state = Emphasis::RIGHT;
-					em.text.stop = i;
-                    [[fallthrough]]; // pass through to case Emphasis::RIGHT
-				}
-                else
-                {
+            case Emphasis::MIDDLE:
+            {
+                if (em.sym != c)
                     break;
-                }
-			case Emphasis::RIGHT:
-				if( em.sym == c )
+                em.state     = Emphasis::RIGHT;
+                em.text.stop = i;
+                [[fallthrough]]; // pass through to case Emphasis::RIGHT
+            }
+            case Emphasis::RIGHT:
+                if( em.sym == c )
                 {
 					if( line.emphasisCount < 3 && ( i - em.text.stop + 1 == line.emphasisCount ) )
                     {
