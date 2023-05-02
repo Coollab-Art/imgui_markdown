@@ -385,6 +385,8 @@ namespace ImGui
         {
             ImGui::Bullet();
             ImGui::SameLine();
+            ImGui::TextUnformatted(" ");
+            ImGui::SameLine();
             RenderTextWrapped( text_, text_end_, true );
         }
 
