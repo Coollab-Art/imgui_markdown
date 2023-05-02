@@ -784,7 +784,7 @@ namespace ImGui
                 if( em.state == Emphasis::MIDDLE && line.emphasisCount >=3 &&
                     ( line.lineStart + line.emphasisCount ) == i )
                 {
-                    ImGui::Separator();
+                    ImGui::SeparatorText("");
                 }
                 else
                 {
@@ -808,7 +808,7 @@ namespace ImGui
 
         if( em.state == Emphasis::LEFT && line.emphasisCount >= 3 )
         {
-            ImGui::Separator();
+            ImGui::SeparatorText("");
         }
         else
         {
@@ -964,7 +964,7 @@ namespace ImGui
             {
                 if( fmt.separator )
                 {
-                    ImGui::Separator();
+                    ImGui::SeparatorText("");
                     ImGui::NewLine();
                 }
                 else
