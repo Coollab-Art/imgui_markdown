@@ -357,7 +357,7 @@ namespace ImGui
         {
             float       scale = ImGui::GetIO().FontGlobalScale;
             float       widthLeft = GetContentRegionAvail().x;
-            const char* endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+            const char* endLine = ImGui::GetFont()->CalcWordWrapPosition( scale, text_, text_end_, widthLeft );
             ImGui::TextUnformatted( text_, endLine );
             if( bIndentToHere_ )
             {
@@ -373,7 +373,7 @@ namespace ImGui
             {
                 text_ = endLine;
                 if( *text_ == ' ' ) { ++text_; }    // skip a space at start of line
-                endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                endLine = ImGui::GetFont()->CalcWordWrapPosition( scale, text_, text_end_, widthLeft );
                 if( text_ == endLine )
                 {
                     endLine++;
@@ -873,7 +873,7 @@ namespace ImGui
         return bThisItemHovered;
     }
 
-    // IsCharInsideWord based on ImGui's CalcWordWrapPositionA
+    // IsCharInsideWord based on ImGui's CalcWordWrapPosition
     inline bool IsCharInsideWord( char c_ )
     {
         return c_ != ' ' && c_ != '.' && c_ != ',' && c_ != ';' && c_ != '!' && c_ != '?' && c_ != '\"';
@@ -887,7 +887,7 @@ namespace ImGui
             const char* endLine = text_;
             if( widthLeft > 0.0f )
             {
-                endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                endLine = ImGui::GetFont()->CalcWordWrapPosition( scale, text_, text_end_, widthLeft );
             }
 
             if( endLine > text_ && endLine < text_end_ )
@@ -896,7 +896,7 @@ namespace ImGui
                 {
                     // see if we can do a better cut.
                     float       widthNextLine = widthLeft + GetCursorScreenPos().x - GetWindowPos().x; // was GetContentRegionMax().x on IMGUI_VERSION_NUM < 19099
-                    const char* endNextLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthNextLine );
+                    const char* endNextLine = ImGui::GetFont()->CalcWordWrapPosition( scale, text_, text_end_, widthNextLine );
                     if( endNextLine == text_end_ || ( endNextLine <= text_end_ && !IsCharInsideWord( *endNextLine ) ) )
                     {
                         // can possibly do better if go to next line
@@ -919,7 +919,7 @@ namespace ImGui
             {
                 text_ = endLine;
                 if( *text_ == ' ' ) { ++text_; }    // skip a space at start of line
-                endLine = ImGui::GetFont()->CalcWordWrapPositionA( scale, text_, text_end_, widthLeft );
+                endLine = ImGui::GetFont()->CalcWordWrapPosition( scale, text_, text_end_, widthLeft );
                 if( text_ == endLine )
                 {
                     endLine++;
